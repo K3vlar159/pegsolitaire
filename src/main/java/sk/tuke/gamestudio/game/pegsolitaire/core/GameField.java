@@ -5,12 +5,14 @@ public class GameField {
     private final String[][] pattern;
     private final int rowCount;
     private final int columnCount;
+    private FieldState state;
 
     public GameField(String[][] pattern) {
         this.tiles = new Tile[pattern.length][pattern[0].length];
         this.pattern = pattern;
         this.rowCount = pattern.length;
         this.columnCount = pattern[0].length;
+        this.state = FieldState.PLAYING;
         build();
     }
 
@@ -36,7 +38,7 @@ public class GameField {
     private boolean canBeMoved(int row, int col, MoveDirection dir) {
         Tile tile = tiles[row][col];
         if (tile.getState() != TileState.PEG) {
-            System.out.println("Not a Peg !!!");
+            //System.out.println("Not a Peg !!!");
             return false;
         }
         else {
@@ -89,6 +91,7 @@ public class GameField {
 
     public void movePeg(int row, int col, MoveDirection dir) {
         if (canBeMoved(row, col, dir)) {
+            destroyPeg(row, col);
             switch (dir) {
                 case UP:
                     destroyPeg(row - 1, col);
@@ -108,6 +111,18 @@ public class GameField {
                     break;
             }
 
+
+        }
+    }
+    public void updateState()
+    {
+        if(!anyMovesLeft())
+        {
+            if(isSolved()){
+                this.state = FieldState.SOLVED;
+                return;
+            }
+            this.state = FieldState.FAILED;
         }
     }
 
@@ -121,5 +136,13 @@ public class GameField {
 
     public Tile getTile(int row, int col) {
         return tiles[row][col];
+    }
+
+    public FieldState getState() {
+        return state;
+    }
+
+    public void setState(FieldState state) {
+        this.state = state;
     }
 }
