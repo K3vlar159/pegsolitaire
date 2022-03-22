@@ -4,7 +4,12 @@ import sk.tuke.gamestudio.game.pegsolitaire.core.FieldState;
 import sk.tuke.gamestudio.game.pegsolitaire.core.GameField;
 import sk.tuke.gamestudio.game.pegsolitaire.core.MoveDirection;
 import sk.tuke.gamestudio.game.pegsolitaire.core.Tile;
+import sk.tuke.gamestudio.game.pegsolitaire.entity.Comment;
+import sk.tuke.gamestudio.game.pegsolitaire.entity.Rating;
+import sk.tuke.gamestudio.game.pegsolitaire.entity.Score;
+import sk.tuke.gamestudio.game.pegsolitaire.service.*;
 
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,27 +19,56 @@ public class ConsoleUI {
     private final GameField field;
     private final Scanner scanner = new Scanner(System.in);
     private static final Pattern INPUT_PATTERN = Pattern.compile("([A-G])([1-7])([UDLR])");
+    private ScoreService scoreService = new ScoreServiceJDBC();
+    private CommentService commentService = new CommentServiceJDBC();
+    private RatingService ratingService = new RatingServiceJDBC();
+
 
     public ConsoleUI(GameField field) {
         this.field = field;
     }
 
-    public void start() {
+    public void play() {
+        printTopScores();
         while (field.getState() == FieldState.PLAYING) {
-            drawField(this.field);
-            processInput();
+            show(this.field);
+            handleInput();
             field.updateState();
         }
+        show(this.field);
         if(field.getState() == FieldState.SOLVED)
         {
+            scoreService.addScore(new Score("pegsolitaire", System.getProperty("user.name"), field.getScore(), new Date()));
             System.out.println("Congratulations, you solved the puzzle :)");
         }
         else{
             System.out.println("Sorry, you failed :(");
         }
+        stopOrRestart();
     }
 
-    private void drawField(GameField field) {
+    private void stopOrRestart()
+    {
+        System.out.println("Do you want to play again ? Y/N");
+        String input = scanner.nextLine().toUpperCase();
+        if ("N".equals(input)) {
+            rateAndComment();
+            printLatestComments();
+            printAvgRating();
+            System.out.println("Thanks for playing !");
+            System.exit(0);
+        }
+        else if ("Y".equals(input)) {
+            this.field.reset();
+            this.play();
+        }
+        else {
+            System.out.println("Wrong input !");
+            stopOrRestart();
+        }
+    }
+
+    private void show(GameField field) {
         printHeader(field);
         printBody(field);
     }
@@ -74,11 +108,11 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    private void processInput() {
+    private void handleInput() {
         System.out.println("Commands: X - exit, A1L - move peg, directions - U=UP, D=DOWN, L=LEFT, R=RIGHT");
         String input = scanner.nextLine().toUpperCase();
         if ("X".equals(input)) {
-            System.exit(0);
+            stopOrRestart();
         }
         Matcher matcher = INPUT_PATTERN.matcher(input);
         processMatcher(matcher);
@@ -107,4 +141,80 @@ public class ConsoleUI {
             System.out.println("Invalid input !!");
         }
     }
+
+    private void printTopScores() {
+        var scores = scoreService.getTopScores("pegsolitaire");
+        System.out.println("---------------------------------------------------------------");
+        for (int i = 0; i < scores.size(); i++) {
+            var score = scores.get(i);
+            System.out.printf("%d. %s %d\n", i + 1, score.getPlayer(), score.getPoints());
+        }
+        System.out.println("---------------------------------------------------------------");
+    }
+
+    private void printLatestComments() {
+        var comments = commentService.getComments("pegsolitaire");
+        System.out.println("-------- Latest comments -------------------------------------------------------");
+        for (int i = 0; i < comments.size(); i++) {
+            var comment = comments.get(i);
+            System.out.printf("%d. %s: %s\n", i + 1, comment.getPlayer(), comment.getComment());
+        }
+        System.out.println("---------------------------------------------------------------");
+    }
+
+    private void rate()
+    {
+        System.out.println("Rate the game from 0 to 5 :");
+        if(scanner.hasNextInt()) {
+            int rating = scanner.nextInt();
+            if(rating < 0 || rating > 5)
+            {
+                System.out.println("Rating must be a number between 0 and 5 !!");
+                rate();
+            }
+            else {
+                ratingService.setRating(new Rating("pegsolitaire", System.getProperty("user.name"), rating, new Date()));
+            }
+        }
+        else {
+            System.out.println("Rating must be a number between 0 and 5 !!");
+            scanner.next();
+            rate();
+        }
+
+    }
+    private void comment()
+    {
+        System.out.println("Write your comment. If you dont want to add comment ,enter 'X'");
+        String comment = scanner.nextLine();
+        if ("x".equals(comment) || ("X".equals(comment)) ){
+            return;
+        }
+        else {
+            commentService.addComment(new Comment("pegsolitaire", System.getProperty("user.name"), comment, new Date()));
+        }
+    }
+
+    private void rateAndComment()
+    {
+        System.out.println("Do you want to rate and comment ? Y/N");
+        String input = scanner.nextLine().toUpperCase();
+        if ("N".equals(input)) {
+            return;
+        }
+        else if ("Y".equals(input)) {
+            comment();
+            rate();
+        }
+        else {
+            System.out.println("Wrong input !");
+            rateAndComment();
+        }
+    }
+
+    private void printAvgRating()
+    {
+        System.out.printf("Average rating: %d\n", ratingService.getAverageRating("pegsolitaire"));
+    }
+
 }
