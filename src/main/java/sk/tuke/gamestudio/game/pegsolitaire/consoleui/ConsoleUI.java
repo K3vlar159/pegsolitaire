@@ -191,7 +191,8 @@ public class ConsoleUI {
             return;
         }
         else {
-            commentService.addComment(new Comment("pegsolitaire", System.getProperty("user.name"), comment, new Date()));
+            var date = new Date();
+            commentService.addComment(new Comment("pegsolitaire", System.getProperty("user.name"), comment,date));
         }
     }
 

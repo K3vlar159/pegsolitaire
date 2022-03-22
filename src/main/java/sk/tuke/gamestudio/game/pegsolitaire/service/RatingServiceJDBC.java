@@ -38,6 +38,7 @@ public class RatingServiceJDBC implements RatingService {
             statement.setString(1, game);
             statement.setString(2, player);
             try (ResultSet rs = statement.executeQuery()) {
+                rs.next();
                 Rating rating = new Rating(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTimestamp(4));
                 return rating.getRating();
             }

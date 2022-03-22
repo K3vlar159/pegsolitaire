@@ -13,7 +13,7 @@ public class CommentServiceJDBC implements CommentService {
         public static final String PASSWORD = "admin";
         public static final String SELECT = "SELECT game, player, comment, commentedOn FROM comment WHERE game = ? ORDER BY commentedOn DESC LIMIT 5";
         public static final String DELETE = "DELETE FROM comment";
-        public static final String INSERT = "INSERT INTO comment (game, player, comment, commentedOn) VALUES (?, ?, ?, ?)";
+        public static final String INSERT = "INSERT INTO comment (game, player, comment, commentedOn) VALUES (?,?,?,?)";
 
         @Override
         public void addComment(Comment comment) {
