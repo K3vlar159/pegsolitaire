@@ -1,17 +1,25 @@
 package sk.tuke.gamestudio.game.pegsolitaire.core;
 
+import static java.lang.Math.round;
+
 public class GameField {
     private final Tile[][] tiles;
     private final String[][] pattern;
     private final int rowCount;
     private final int columnCount;
     private FieldState state;
+    private long startTime;
 
     public GameField(String[][] pattern) {
         this.tiles = new Tile[pattern.length][pattern[0].length];
         this.pattern = pattern;
         this.rowCount = pattern.length;
         this.columnCount = pattern[0].length;
+        this.state = FieldState.PLAYING;
+        build();
+    }
+
+    public void reset(){
         this.state = FieldState.PLAYING;
         build();
     }
@@ -33,6 +41,7 @@ public class GameField {
 
             }
         }
+        startTime = System.currentTimeMillis();
     }
 
     private boolean canBeMoved(int row, int col, MoveDirection dir) {
@@ -124,6 +133,10 @@ public class GameField {
             }
             this.state = FieldState.FAILED;
         }
+    }
+
+    public int getScore() {
+        return round(50000 / ((int) (System.currentTimeMillis() - startTime) / 1000));
     }
 
     public int getRowCount() {

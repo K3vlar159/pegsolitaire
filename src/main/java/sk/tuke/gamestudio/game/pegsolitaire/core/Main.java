@@ -11,11 +11,19 @@ public class Main {
             {"peg", "peg", "peg", "peg", "peg", "peg", "peg"},
             {"null", "null", "peg", "peg", "peg", "null", "null"},
             {"null", "null", "peg", "peg", "peg", "null", "null"}};
+    private static final String[][] standardtest = {
+            {"null", "null", "empty", "empty", "empty", "null","null"},
+            {"null", "null", "empty", "empty", "empty", "null","null"},
+            {"empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+            {"empty", "empty", "peg", "empty", "peg", "peg", "empty"},
+            {"empty", "empty", "empty", "empty", "empty", "empty", "empty"},
+            {"null", "null", "empty", "empty", "empty", "null","null"},
+            {"null", "null", "empty", "empty", "empty", "null","null"}};
 
     public static void main(String[] args) {
-        GameField field = new GameField(standard);
+        GameField field = new GameField(standardtest);
         ConsoleUI ui = new ConsoleUI(field);
-        ui.start();
+        ui.play();
     }
 
 }
