@@ -1,16 +1,37 @@
 package sk.tuke.gamestudio.entity;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Rating {
+@Entity
+@NamedQuery(
+        name= "Rating.setRating",
+        query= "UPDATE Rating r SET r.rating= :rating, r.ratedOn= :ratedOn WHERE r.game= :game AND r.player= :player")
+@NamedQuery( name = "Rating.getAvgRating",
+        query = "SELECT AVG(rating) FROM Rating r WHERE r.game= :game")
+@NamedQuery( name = "Rating.getRating",
+        query = "SELECT r FROM Rating r WHERE r.game= :game AND r.player= :player")
+@NamedQuery( name = "Rating.resetRatings",
+        query = "DELETE FROM Rating")
+public class Rating implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private int ident;
+
     private String game;
-
     private String player;
-
     private int rating;
-
     private Date ratedOn;
+
+    public Rating(){
+
+    }
 
     public Rating(String game, String player, int rating, Date ratedOn) {
         this.game = game;
@@ -49,6 +70,14 @@ public class Rating {
 
     public void setRatedOn(Date ratedOn) {
         this.ratedOn = ratedOn;
+    }
+
+    public int getIdent() {
+        return ident;
+    }
+
+    public void setIdent(int ident) {
+        this.ident = ident;
     }
 
     @Override

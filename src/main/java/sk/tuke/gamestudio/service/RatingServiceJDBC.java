@@ -69,7 +69,7 @@ public class RatingServiceJDBC implements RatingService {
         ) {
             statement.executeUpdate(DELETE);
         } catch (SQLException e) {
-            throw new RatingException("Problem deleting ratiing", e);
+            throw new RatingException("Problem deleting rating", e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package sk.tuke.gamestudio.game.pegsolitaire.consoleui;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import sk.tuke.gamestudio.game.pegsolitaire.core.FieldState;
 import sk.tuke.gamestudio.game.pegsolitaire.core.GameField;
 import sk.tuke.gamestudio.game.pegsolitaire.core.MoveDirection;
@@ -18,9 +19,13 @@ public class ConsoleUI {
     private final GameField field;
     private final Scanner scanner = new Scanner(System.in);
     private static final Pattern INPUT_PATTERN = Pattern.compile("([A-G])([1-7])([UDLR])");
-    private ScoreService scoreService = new ScoreServiceJDBC();
-    private CommentService commentService = new CommentServiceJDBC();
-    private RatingService ratingService = new RatingServiceJDBC();
+
+    @Autowired
+    private ScoreService scoreService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private RatingService ratingService;
 
 
     public ConsoleUI(GameField field) {
