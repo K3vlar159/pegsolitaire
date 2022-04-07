@@ -1,4 +1,4 @@
-package sk.tuke.gamestudio.game.pegsolitaire.entity;
+package sk.tuke.gamestudio.entity;
 
 
 import java.util.Date;

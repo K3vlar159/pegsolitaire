@@ -4,11 +4,10 @@ import sk.tuke.gamestudio.game.pegsolitaire.core.FieldState;
 import sk.tuke.gamestudio.game.pegsolitaire.core.GameField;
 import sk.tuke.gamestudio.game.pegsolitaire.core.MoveDirection;
 import sk.tuke.gamestudio.game.pegsolitaire.core.Tile;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Comment;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Rating;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Score;
-import sk.tuke.gamestudio.game.pegsolitaire.service.*;
-
+import sk.tuke.gamestudio.entity.Comment;
+import sk.tuke.gamestudio.entity.Rating;
+import sk.tuke.gamestudio.entity.Score;
+import sk.tuke.gamestudio.service.*;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;

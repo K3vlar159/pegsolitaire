@@ -1,6 +1,7 @@
-package sk.tuke.gamestudio.game.pegsolitaire.core;
+package sk.tuke.gamestudio;
 
 import sk.tuke.gamestudio.game.pegsolitaire.consoleui.ConsoleUI;
+import sk.tuke.gamestudio.game.pegsolitaire.core.GameField;
 
 public class Main {
     private static final String[][] standard = {

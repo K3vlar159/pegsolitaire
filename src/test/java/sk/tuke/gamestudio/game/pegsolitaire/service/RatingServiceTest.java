@@ -1,8 +1,9 @@
 package sk.tuke.gamestudio.game.pegsolitaire.service;
 
 import org.junit.Test;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Comment;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Rating;
+import sk.tuke.gamestudio.entity.Rating;
+import sk.tuke.gamestudio.service.RatingService;
+import sk.tuke.gamestudio.service.RatingServiceJDBC;
 
 
 import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package sk.tuke.gamestudio.game.pegsolitaire.service;
+package sk.tuke.gamestudio.service;
 
 public class ScoreException extends RuntimeException {
     public ScoreException(String message) {

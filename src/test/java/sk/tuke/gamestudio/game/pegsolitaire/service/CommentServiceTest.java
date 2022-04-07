@@ -1,13 +1,14 @@
 package sk.tuke.gamestudio.game.pegsolitaire.service;
 
 import org.junit.Test;
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Comment;
+import sk.tuke.gamestudio.entity.Comment;
+import sk.tuke.gamestudio.service.CommentService;
+import sk.tuke.gamestudio.service.CommentServiceJDBC;
 
 
 import static org.junit.Assert.*;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class CommentServiceTest {
     private CommentService commentService = new CommentServiceJDBC();

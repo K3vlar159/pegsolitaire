@@ -1,7 +1,7 @@
-package sk.tuke.gamestudio.game.pegsolitaire.service;
+package sk.tuke.gamestudio.service;
 
 
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Comment;
+import sk.tuke.gamestudio.entity.Comment;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package sk.tuke.gamestudio.game.pegsolitaire.service;
+package sk.tuke.gamestudio.service;
 
-import sk.tuke.gamestudio.game.pegsolitaire.entity.Rating;
+import sk.tuke.gamestudio.entity.Rating;
 
 import java.sql.*;
 
