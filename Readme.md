@@ -1,0 +1,1 @@
+2. Odovzdavka: https://youtu.be/tiuofkfM-2A
