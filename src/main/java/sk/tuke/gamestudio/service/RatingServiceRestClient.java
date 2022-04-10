@@ -2,10 +2,8 @@ package sk.tuke.gamestudio.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
-import sk.tuke.gamestudio.entity.Comment;
 import sk.tuke.gamestudio.entity.Rating;
 
-import java.util.Arrays;
 
 public class RatingServiceRestClient implements RatingService{
 
