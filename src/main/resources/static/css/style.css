@@ -1,0 +1,57 @@
+
+.boards {
+    display: table;
+    margin: 0 auto;
+}
+
+.game {
+    display: table;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 1.6em
+}
+
+h2 {
+    font-size: 1.4em
+}
+
+h3 {
+    font-size: 1.2em
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover {
+    color: #045491;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+table.scores {
+    width: 100%;
+    border: black 2px;
+}
+
+
+table.scores th {
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: dimgray;
+
+}
+
+table.scores tr:nth-child(even) {
+    background-color: lightgray
+}
+
+table.scores tr:nth-child(odd) {
+    background-color: white;
+}
+
+

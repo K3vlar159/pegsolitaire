@@ -2,6 +2,7 @@ package sk.tuke.gamestudio;
 
 import sk.tuke.gamestudio.game.pegsolitaire.consoleui.ConsoleUI;
 import sk.tuke.gamestudio.game.pegsolitaire.core.GameField;
+import sk.tuke.gamestudio.game.pegsolitaire.core.Pattern;
 
 public class Main {
     private static final String[][] standard = {
@@ -22,7 +23,7 @@ public class Main {
             {"null", "null", "empty", "empty", "empty", "null","null"}};
 
     public static void main(String[] args) {
-        GameField field = new GameField(standardtest);
+        GameField field = new GameField(Pattern.STANDARD.getPattern());
         ConsoleUI ui = new ConsoleUI(field);
         ui.play();
     }

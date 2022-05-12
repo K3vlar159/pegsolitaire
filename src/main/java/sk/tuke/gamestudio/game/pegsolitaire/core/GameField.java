@@ -9,6 +9,7 @@ public class GameField {
     private final int columnCount;
     private FieldState state;
     private long startTime;
+    private boolean firstMove;
 
     public GameField(String[][] pattern) {
         this.tiles = new Tile[pattern.length][pattern[0].length];
@@ -41,7 +42,7 @@ public class GameField {
 
             }
         }
-        startTime = System.currentTimeMillis();
+        firstMove = true;
     }
 
     private boolean canBeMoved(int row, int col, MoveDirection dir) {
@@ -99,6 +100,10 @@ public class GameField {
     }
 
     public void movePeg(int row, int col, MoveDirection dir) {
+        if(firstMove){
+            startTime = System.currentTimeMillis();
+            firstMove = false;
+        }
         if (canBeMoved(row, col, dir)) {
             destroyPeg(row, col);
             switch (dir) {
@@ -122,6 +127,7 @@ public class GameField {
 
 
         }
+        updateState();
     }
     public void updateState()
     {
@@ -136,7 +142,11 @@ public class GameField {
     }
 
     public int getScore() {
-        return round(50000 / ((int) (System.currentTimeMillis() - startTime) / 1000));
+        int denominator = ((int) (System.currentTimeMillis() - startTime) / 1000);
+        if(denominator == 0){
+            return 50000;
+        }
+        return round(50000 / denominator);
     }
 
     public int getRowCount() {

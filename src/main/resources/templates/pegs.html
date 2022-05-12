@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gamestudio</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body>
+<div th:replace="fragments::header"/>
+
+<div class="boards">
+<a href="/pegsolitaire/standard">STANDARD</a>&nbsp;&nbsp;
+<a href="/pegsolitaire/test">TEST</a><br><br><br>
+</div>
+
+<div class="game">
+    <span th:utext="${@pegsolitaireController.htmlField}">
+    </span>
+    <br><br><br>
+</div>
+
+<form action="/pegsolitaire/playerfeedback">
+    <input type="submit" value="Comments page" />
+</form>
+
+<table class="scores">
+    <thead>
+    <tr>
+        <th>Player</th>
+        <th>Score</th>
+        <th>Played on</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="score: ${topscores}">
+        <td th:text="${score.player}"/></td>
+        <td th:text="${score.points}"/></td>
+        <td th:text="${score.playedOn}"/></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments::footer"/>
+</body>
+</html>
