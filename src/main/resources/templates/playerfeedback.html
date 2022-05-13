@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
+<a class="abutton" href="/pegsolitaire">Return to game</a>
 <span th:if="${@userController.logged}">
     Logged in as: <span th:text="${@userController.loggedUser.login}"/><br/>
 </span>
@@ -19,6 +19,8 @@
     <input type="submit"/>
 </form>
 
+
+
 <form th:if="${@userController.logged}" action="/pegsolitaire/rate" method="post">
     Rating: <input type="range" value="3" name = "rating" min="1" max="5" oninput="this.nextElementSibling.value = this.value"/>
     <output>3</output>
@@ -29,7 +31,7 @@
 Average rating: <span th:text="${averagerating}"/><br/>
 
 
-<table class="scores">
+<table class="comments">
     <thead>
     <tr>
         <th>Player</th>

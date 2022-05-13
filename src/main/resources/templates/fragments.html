@@ -1,22 +1,20 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gamestudio</title>
+    <link rel="stylesheet" href="/css/stylesheet.css"/>
+</head>
+<body>
 
-<div th:fragment="header">
+<header th:fragment="header">
     <h1>Welcome to <a href="/">Gamestudio!</a></h1>
-    <span th:if="${@userController.logged}">
-        Logged as: <span th:text="${@userController.loggedUser.login}"/>
-        <a href="/logout">Logout</a><br/>
-    </span>
+</header>
 
-    <span th:if="not ${@userController.logged}">
-        Not logged. Please
-        <a href="/">login or register</a>.<br/>
-    </span>
-</div>
-
-<div th:fragment="footer">
+<footer th:fragment="footer">
     <hr/>
-    This is gamestudio! Developed at TUKE.
-</div>
+    This is Gamestudio! Developed at <a href="https://kpi.fei.tuke.sk">KPI FEI TUKE</a>.
+</footer>
 
+</body>
 </html>

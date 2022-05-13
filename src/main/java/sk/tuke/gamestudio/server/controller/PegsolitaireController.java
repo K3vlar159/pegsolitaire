@@ -92,28 +92,58 @@ public class PegsolitaireController {
 
     public String getHtmlField() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<table>\n");
+        sb.append("<table class='gamefield'>\n");
         for (int row = 0; row < field.getRowCount(); row++) {
             sb.append("<tr>\n");
             for (int col = 0; col < field.getColumnCount(); col++) {
                 Tile tile = field.getTile(row, col);
-                sb.append("<td>\n");
-                sb.append("<a href='/pegsolitaire?row=" + row + "&col=" + col + "'>\n");
-                if(currentCol != null && currentRow != null && col == currentCol && row == currentRow && tile.getState() == TileState.PEG){
-                    sb.append("<img src='/images/selected.png'>");
-                }
-                else{
-                    sb.append("<img src='/images/" + getImageName(tile) + ".png'>");
-                }
-
-                sb.append("</a>\n");
+                sb.append("<td class='" + getTileClass(tile,row,col) + "'>\n");
+                if (tile.getState() != TileState.CLOSED)
+                    sb.append("<a href='/pegsolitaire?row=" + row + "&col=" + col + "'>\n");
+                sb.append("<span>" + getTileText(tile) + "</span>");
+                if (tile.getState() != TileState.CLOSED)
+                    sb.append("</a>\n");
                 sb.append("</td>\n");
+
             }
             sb.append("</tr>\n");
         }
-        sb.append("<table>\n");
+        sb.append("</table>\n");
         return sb.toString();
     }
+
+    private String getTileClass(Tile tile, int row,int col) {
+        if(currentRow != null && currentCol != null) {
+            if (row == currentRow.intValue() && col == currentCol.intValue()) {
+                return "selected";
+            }
+        }
+        switch (tile.getState()) {
+            case PEG:
+                return "peg";
+            case CLOSED:
+                return "closed";
+            case EMPTY:
+                return "empty";
+            default:
+                throw new RuntimeException("Unexpected tile state");
+        }
+    }
+
+    private String getTileText(Tile tile) {
+        switch (tile.getState()) {
+            case CLOSED:
+                return " ";
+            case PEG:
+                return "O";
+            case EMPTY:
+                return "-";
+            default:
+                throw new IllegalArgumentException("Unsupported tile state " + tile.getState());
+        }
+    }
+
+
 
     private String getImageName(Tile tile) {
         switch (tile.getState()) {

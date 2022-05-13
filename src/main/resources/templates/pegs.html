@@ -9,21 +9,19 @@
 
 <body>
 <div th:replace="fragments::header"/>
+<h1>Pegsolitaire</h1>
 
-<div class="boards">
-<a href="/pegsolitaire/standard">STANDARD</a>&nbsp;&nbsp;
-<a href="/pegsolitaire/test">TEST</a><br><br><br>
+<div class="pegsControl">
+
+    <a class="abutton" href="/pegsolitaire/standard">STANDARD</a>
+    <a class="abutton" href="/pegsolitaire/test">TEST</a>
+    <a class="abutton" href="/pegsolitaire/playerfeedback">FEEDBACK</a>
+
 </div>
 
-<div class="game">
-    <span th:utext="${@pegsolitaireController.htmlField}">
-    </span>
-    <br><br><br>
-</div>
 
-<form action="/pegsolitaire/playerfeedback">
-    <input type="submit" value="Comments page" />
-</form>
+<div th:utext="${@pegsolitaireController.htmlField}"></div>
+
 
 <table class="scores">
     <thead>
