@@ -78,12 +78,6 @@ public class PegsolitaireController {
         field = new GameField(Pattern.EUROPEAN.getPattern());
         return "pegs";
     }
-    @RequestMapping("/diamond")
-    public String diamond(){
-        field = new GameField(Pattern.DIAMOND.getPattern());
-        return "pegs";
-    }
-
     @RequestMapping("/test")
     public String test(){
         field = new GameField(Pattern.TEST.getPattern());

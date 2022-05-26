@@ -8,12 +8,6 @@ body {
     padding: 1em;
 }
 
-label {
-    vertical-align: top;
-    display: inline-block; /*instead of inline (default)*/
-    min-width: 5em;
-}
-
 
 h1 {
     font-size: 1.8em
@@ -39,6 +33,23 @@ a:link:hover, a:visited:hover {
     text-decoration: underline;
 }
 
+a.abutton {
+    border: 1px solid darkslategrey;
+    display: inline-block;
+    width: 9.2em;
+    margin: 0.1em;
+    padding: 0.1em;
+    background-color: white;
+    text-align: center;
+}
+
+a.abutton:hover {
+    background-color: lightgray;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/*gamefield */
 table.gamefield td {
     text-align: center;
     width: 2em;
@@ -57,7 +68,7 @@ table.gamefield td.selected {
 }
 
 table.gamefield td.peg {
-    background: radial-gradient(circle at 65% 15%, aqua 3%, darkblue 60%, aqua 100%);
+    background: radial-gradient(circle at 65% 15%, lightgray 3%, gray 60%, lightgray 100%);
     color: transparent;
 }
 
@@ -65,25 +76,6 @@ table.gamefield td.empty {
     background-color: lightgray;
     color: lightgray;
 }
-
-a.abutton {
-    border: 1px solid darkslategrey;
-    display: inline-block;
-    width: 9.2em;
-    margin: 0.1em;
-    padding: 0.1em;
-    background-color: white;
-    font-weight: normal;
-    text-align: center;
-}
-
-a.abutton:hover {
-    background-color: lightgray;
-    text-decoration: none;
-    font-weight: normal;
-}
-
-
 
 table.gamefield a:link,
 table.gamefield a:visited,

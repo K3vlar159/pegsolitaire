@@ -29,6 +29,11 @@ public class FeedbackController {
     public String commentsAndRating(Model model){
         model.addAttribute("latestcomments",commentService.getComments("pegsolitaire"));
         model.addAttribute("averagerating",ratingService.getAverageRating("pegsolitaire"));
+        try {
+            model.addAttribute("playerrating",ratingService.getRating("pegsolitaire", userController.getLoggedUser().getLogin()));
+        }
+        catch(Exception e) {
+        }
         return "playerfeedback";
     }
 
@@ -41,7 +46,6 @@ public class FeedbackController {
     @RequestMapping("/rate")
     public String setRating(int rating, Model model) {
         ratingService.setRating(new Rating("pegsolitaire", userController.getLoggedUser().getLogin(), rating, new Date()));
-        model.addAttribute("playerrating",ratingService.getRating("pegsolitaire", userController.getLoggedUser().getLogin()));
         return "redirect:/pegsolitaire/playerfeedback";
     }
 
