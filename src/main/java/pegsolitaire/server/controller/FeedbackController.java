@@ -1,0 +1,45 @@
+package pegsolitaire.server.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
+import pegsolitaire.entity.Comment;
+import pegsolitaire.entity.Rating;
+import pegsolitaire.service.CommentService;
+import pegsolitaire.service.RatingService;
+
+import java.util.Date;
+
+@Controller
+@RequestMapping("/pegsolitaire")
+@Scope(WebApplicationContext.SCOPE_SESSION)
+public class FeedbackController {
+    @Autowired private UserController userController;
+    @Autowired private CommentService commentService;
+    @Autowired private RatingService ratingService;
+
+    @RequestMapping("/playerfeedback")
+    public String commentsAndRating(Model model){
+        model.addAttribute("latestcomments",commentService.getComments("pegsolitaire"));
+        model.addAttribute("averagerating",ratingService.getAverageRating("pegsolitaire"));
+        try { model.addAttribute("playerrating",ratingService.getRating("pegsolitaire", userController.getLoggedUser().getLogin())); }
+        catch(Exception e) { }
+        return "playerfeedback";
+    }
+
+    @RequestMapping("/addcomment")
+    public String addComment(String text) {
+        commentService.addComment(new Comment("pegsolitaire", userController.getLoggedUser().getLogin(), text, new Date()));
+        return "redirect:/pegsolitaire/playerfeedback";
+    }
+
+    @RequestMapping("/rate")
+    public String setRating(int rating, Model model) {
+        ratingService.setRating(new Rating("pegsolitaire", userController.getLoggedUser().getLogin(), rating, new Date()));
+        return "redirect:/pegsolitaire/playerfeedback";
+    }
+}
+
