@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 import pegsolitaire.entity.Score;
-import pegsolitaire.game.pegsolitaire.core.*;
+import pegsolitaire.game.core.*;
 import pegsolitaire.service.ScoreService;
 
 import java.util.Date;
@@ -97,4 +97,5 @@ public class PegsolitaireController {
         }
     }
 }
+
 

@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.web.client.RestTemplate;
-import pegsolitaire.game.pegsolitaire.consoleui.ConsoleUI;
-import pegsolitaire.game.pegsolitaire.core.GameField;
+import pegsolitaire.game.consoleui.ConsoleUI;
+import pegsolitaire.game.core.GameField;
 import pegsolitaire.service.*;
 
 @SpringBootApplication

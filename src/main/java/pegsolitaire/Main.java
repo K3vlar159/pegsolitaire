@@ -1,8 +1,8 @@
 package pegsolitaire;
 
-import pegsolitaire.game.pegsolitaire.consoleui.ConsoleUI;
-import pegsolitaire.game.pegsolitaire.core.GameField;
-import pegsolitaire.game.pegsolitaire.core.Pattern;
+import pegsolitaire.game.consoleui.ConsoleUI;
+import pegsolitaire.game.core.GameField;
+import pegsolitaire.game.core.Pattern;
 
 public class Main {
     public static void main(String[] args) {

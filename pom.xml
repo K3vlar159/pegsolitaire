@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>sk.tuke</groupId>
-    <artifactId>gamestudio</artifactId>
+    <groupId>pegsolitaire</groupId>
+    <artifactId>pegsolitaire</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>gamestudio</name>
-    <description>Gamestudio Project</description>
+    <name>Peg Solitaire</name>
+    <description>Peg Solitaire Project</description>
 
 
     <properties>
